@@ -8,12 +8,21 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css">
   <link rel="stylesheet" href="./style.css">
   <script defer src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
   <script type="module" src="./app.js"></script>
+  <script type="module" src="./compare.js"></script>
+  <script type="module" src="./backup.js"></script>
 </head>
 <body>
   <header class="topbar">
     <a class="brand" href="/" aria-label="Kembali ke GOD EYE VIEW"><span class="brand-mark">GEV</span><span>GOD EYE VIEW <small>VIRTUAL TOUR 360°</small></span></a>
-    <div class="top-actions"><span id="storage-status" class="status">Penyimpanan lokal</span><a class="back-link" href="/">Kembali ke Globe</a></div>
+    <div class="top-actions">
+      <span id="storage-status" class="status">Penyimpanan lokal</span>
+      <button id="compare-toggle" class="top-tool" type="button">Bandingkan 360°</button>
+      <button id="backup-export" class="top-tool" type="button">Cadangkan ZIP</button>
+      <a class="back-link" href="/panorama-tools/">Panorama Studio</a>
+      <a class="back-link" href="/">Kembali ke Globe</a>
+    </div>
   </header>
   <main class="layout">
     <aside class="sidebar">
@@ -54,6 +63,21 @@
         <div class="floorplan-heading"><div><p class="eyebrow">PANDUAN LOKASI</p><h2>Denah gedung</h2></div><span id="floorplan-help">Belum ada denah</span></div>
         <div id="floorplan" class="floorplan"><div class="empty">Unggah gambar denah untuk menempatkan penanda ruangan.</div></div>
       </div>
+    </section>
+    <section id="compare-panel" class="compare-panel" hidden>
+      <div class="compare-heading">
+        <div><p class="eyebrow">PANOLOOP-INSPIRED WORKSPACE</p><h2>Perbandingan Panorama 360°</h2></div>
+        <span id="compare-status" class="viewer-message">Pilih dua panorama</span>
+      </div>
+      <div class="compare-selectors">
+        <label>Panorama kiri<select id="compare-left"></select></label>
+        <label>Panorama kanan<select id="compare-right"></select></label>
+      </div>
+      <div class="compare-grid">
+        <div id="compare-left-view" class="compare-view"></div>
+        <div id="compare-right-view" class="compare-view"></div>
+      </div>
+      <p class="hint">Arah pandang dan tingkat zoom disinkronkan untuk membantu membandingkan dua lokasi atau kondisi. Perbandingan ini tidak melakukan penyelarasan otomatis atas foto dari posisi kamera yang berbeda.</p>
     </section>
   </main>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
