@@ -16,6 +16,7 @@ import {
 import { describeError } from './errors.js';
 import { onLocaleChange, t } from '../i18n/index.js';
 import { installVirtualTourGlobe } from '../virtualTour/globeIntegration.js';
+import { installWilkumNavigator } from '../wilkumNavigator.js';
 
 /** Construct the application globe using the caller's local configuration. */
 export async function createApplicationScene({
@@ -131,5 +132,7 @@ export async function createApplicationScene({
   });
 
   signal.throwIfAborted();
-  return { viewer, tileset, mapStackController, operations, virtualTour };
+  const wilkumNavigator = installWilkumNavigator(viewer, operations);
+  defer(() => wilkumNavigator.destroy());
+  return { viewer, tileset, mapStackController, operations, virtualTour, wilkumNavigator };
 }
