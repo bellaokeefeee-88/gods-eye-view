@@ -22,6 +22,8 @@ export const useCctvStore = defineStore('gev-cctv', () => {
   const frame = shallowRef(null);
   /** Whether the live video surface replaces the still frame. */
   const live = shallowRef(false);
+  /** External public watch page for the selected camera, if supplied. */
+  const externalPageUrl = shallowRef('');
   /** `{label, state}` for the source badge; null until first synced. */
   const sourceBadge = shallowRef(null);
   /**
@@ -54,6 +56,11 @@ export const useCctvStore = defineStore('gev-cctv', () => {
     live.value = Boolean(on);
   }
 
+  /** @param {string} url */
+  function setExternalPage(url) {
+    externalPageUrl.value = typeof url === 'string' ? url : '';
+  }
+
   /** @param {{label: string, state: string}} next */
   function setSourceBadge(next) {
     sourceBadge.value = markRaw(next);
@@ -74,6 +81,7 @@ export const useCctvStore = defineStore('gev-cctv', () => {
     calEdit,
     frame,
     live,
+    externalPageUrl,
     sourceBadge,
     summary,
     picker,
@@ -81,6 +89,7 @@ export const useCctvStore = defineStore('gev-cctv', () => {
     setCalEdit,
     setFrame,
     setLive,
+    setExternalPage,
     setSourceBadge,
     setSummary,
     setPicker,
