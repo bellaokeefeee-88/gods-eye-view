@@ -342,3 +342,21 @@ html:not([lang='en']) #cctv-camera-select {
   flex: 1 1 100%;
   order: -1;
 }
+
+
+/* Third-party public CCTV watch page: same preview footprint, isolated by origin. */
+#cctv-external-page {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  min-height: 180px;
+  border: 0;
+  border-radius: 9px;
+  background: #05090d;
+}
+#cctv-external-fallback {
+  color: #91edff;
+  font: 9px var(--font-mono);
+  letter-spacing: 1px;
+  text-decoration: underline;
+}
