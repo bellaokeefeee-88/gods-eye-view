@@ -3491,7 +3491,8 @@
       "src/layers/osmPlaces/index.js",
       "src/app/layers/osmPlaces.js",
       "src/voice/areaActions.js",
-      "src/virtualTour/globeIntegration.js"
+      "src/virtualTour/globeIntegration.js",
+      "src/wilkumNavigator.js"
     ],
     "external": [
       "hls.js",
