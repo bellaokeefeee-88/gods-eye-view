@@ -39,7 +39,7 @@ function fixture(t, id) {
   t.after(() => rmSync(root, { recursive: true, force: true }));
   mkdirSync(path.join(root, 'config'));
   writeFileSync(
-    path.join(root, 'config/cctv_sources.austin.json'),
+    path.join(root, 'config/cctv_sources.banda-aceh.json'),
     JSON.stringify([
       {
         id,
