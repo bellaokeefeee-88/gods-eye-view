@@ -29,3 +29,21 @@ Before building a native camera pack, verify with the portal operator:
 4. Required attribution and any restrictions on storage, recording, or redistribution.
 
 Do not scrape private endpoints, defeat access controls, or represent an offline camera placeholder as a live feed.
+
+## Public catalog observation (26 November 2026)
+
+A public page-index snapshot of the official portal lists 60 entries: 38 marked online and 22 marked offline / under repair. This is a dated observation, not a live availability guarantee. The portal remains the authoritative place to check current camera state.
+
+Visible online camera groups include:
+- Kecamatan Baiturrahman: Bustanussalatin / B Salatin, Diponegoro, and water-level monitoring at Kampung Baru and Putroe Phang.
+- Kecamatan Kuta Alam: Kartini and Underpass Beurawe.
+- Kecamatan Banda Raya: Lhong Raya.
+- Kecamatan Jaya Baru: water-level monitoring at Geuceu Meunara.
+- Kecamatan Kuta Raja: water-level monitoring at KM 0.
+- Kecamatan Meuraxa: port-area cameras and Ulee Lheue.
+
+## Integration readiness
+
+The public page output supports camera display names, kecamatan labels, and online/offline labels. It does not, by itself, establish a supported third-party API contract, WGS84 coordinates, stable public camera IDs, embeddable stream URLs, or permission to proxy/re-publish video. Those fields must not be guessed from camera names or inferred from unrelated map imagery.
+
+The existing CCTV provider can ingest a documented JSON source through CCTV_SOURCES_FILE or CCTV_SOURCES_JSON, but a production Banda Aceh pack must only be populated after the operator supplies or confirms the approved schema and permitted playback URLs. Until then, keep the official portal shortcut available and label native Banda Aceh camera coverage as pending.
