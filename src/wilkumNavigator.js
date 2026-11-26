@@ -1,11 +1,13 @@
 import * as Cesium from 'cesium';
 
+// Official SIMAS Kemenag coordinates for Masjid Raya Baiturrahman,
+// Jl. Moh. Jam No. 1, Kampung Baru, Banda Aceh.
 const WILKUM_VIEW = Object.freeze({
-  longitude: 95.36,
-  latitude: 5.53,
-  height: 62000,
+  longitude: 95.317265,
+  latitude: 5.553592,
+  height: 9500,
   heading: 0,
-  pitch: -58,
+  pitch: -52,
 });
 
 const POLSEK_GROUPS = Object.freeze([
@@ -85,7 +87,7 @@ export function installWilkumNavigator(viewer, operations) {
   const status = document.createElement('div');
   status.className = 'gev-wilkum-status';
   status.setAttribute('role', 'status');
-  status.textContent = 'Tampilan awal: Banda Aceh dan Aceh Besar';
+  status.textContent = 'Titik awal: Masjid Raya Baiturrahman, Banda Aceh';
   body.appendChild(status);
   let active = true;
   let pending = false;
@@ -115,7 +117,7 @@ export function installWilkumNavigator(viewer, operations) {
       },
       duration: 2.5,
     });
-    status.textContent = 'Menampilkan cakupan umum Banda Aceh dan Aceh Besar';
+    status.textContent = 'Titik pandang: Masjid Raya Baiturrahman • Wilkum 19 Polsek';
   }
 
   all.addEventListener('click', showWilkum);
