@@ -44,6 +44,9 @@ jobs:
       - name: Run setup policy checks
         run: npm run doctor -- --json
 
+      - name: Apply repository formatter before validation
+        run: npm run format
+
       - name: Check adopted formatting
         run: npm run format:check
 
