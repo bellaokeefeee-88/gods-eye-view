@@ -240,6 +240,7 @@ export function _renderCctvState(state) {
   }
 
   this.store.publish(presentCctvPanel(state, enabled));
+  this.store.setExternalPage(enabled ? activeCamera?.externalPageUrl || '' : '');
 
   const liveIntent = enabled && !!activeCamera?.isVideo;
   this.store.setLive(liveIntent);

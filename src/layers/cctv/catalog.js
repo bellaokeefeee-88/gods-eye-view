@@ -227,6 +227,8 @@ export function createCatalog({ state: layerState, services, parts, source }) {
         ).toLowerCase(),
         feedType,
         feedConfigured: typeof source.url === 'string' && !!source.url.trim(),
+        // External watch page is opened in an isolated panel iframe, not proxied as media.
+        externalPageUrl: String(source.externalPageUrl || ''),
         lat,
         lon,
         headingDeg,

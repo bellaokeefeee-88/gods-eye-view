@@ -12,7 +12,7 @@ import UiBadge from '../../kit/UiBadge.vue';
 // The CCTV panel, rendered from what CctvControls presents and publishes;
 // until it renders, the panel shows its initial markup. The controls draw
 // the live video into its canvas.
-const { view, frame, live, sourceBadge, summary } = storeToRefs(useCctvStore());
+const { view, frame, live, externalPageUrl, sourceBadge, summary } = storeToRefs(useCctvStore());
 // The frame's request state, as data attributes that read "true" or are
 // empty; none until the controls first publish.
 const flag = (on) => (on ? 'true' : '');
@@ -33,10 +33,21 @@ const frameData = computed(() =>
     <div class="cyber-panel-body ui-scroll" data-rail-scroller>
     <div id="cctv-frame-wrap" :class="['cctv-frame-wrap', { loading: frame?.wrapLoading, 'has-frame': frame?.hasFrame }]">
       <span class="cctv-frame-caption" aria-hidden="true">{{ t('ACQUIRING FRAME') }}</span>
-      <img id="cctv-frame" alt="CCTV feed frame" :class="{ active: frame?.hasFrame }" :src="frame?.src || undefined" :hidden="live" v-bind="frameData" />
+      <img id="cctv-frame" alt="CCTV feed frame" :class="{ active: frame?.hasFrame }" :src="frame?.src || undefined" :hidden="live || externalPageUrl" v-bind="frameData" />
       <canvas id="cctv-video" class="cctv-frame" :hidden="!live"></canvas>
+      <iframe
+        v-if="externalPageUrl"
+        id="cctv-external-page"
+        :src="externalPageUrl"
+        title="Public CCTV live page"
+        loading="lazy"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allow="autoplay; fullscreen; picture-in-picture"
+        allowfullscreen
+      ></iframe>
     </div>
     <UiBadge id="cctv-source-badge" role="status" aria-live="polite" :data-frame-state="sourceBadge?.state">{{ sourceBadge?.label ?? t('SOURCE · UNKNOWN') }}</UiBadge>
+    <a v-if="externalPageUrl" id="cctv-external-fallback" :href="externalPageUrl" target="_blank" rel="noopener noreferrer">OPEN CAMERA SOURCE</a>
     <div id="cctv-meta">{{ view?.meta ?? t('Enable CCTV to load camera intersections') }}</div>
     <div class="cctv-controls">
       <UiButton class="scene-btn" :pressed="Boolean(view?.enabled)" pressed-class="active" id="cctv-enable-btn">{{ view?.enabled ? t('CCTV ON') : t('CCTV OFF') }}</UiButton>
