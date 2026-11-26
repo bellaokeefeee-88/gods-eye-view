@@ -3490,7 +3490,8 @@
       "src/voice/osmActions.js",
       "src/layers/osmPlaces/index.js",
       "src/app/layers/osmPlaces.js",
-      "src/voice/areaActions.js"
+      "src/voice/areaActions.js",
+      "src/virtualTour/globeIntegration.js"
     ],
     "external": [
       "hls.js",
