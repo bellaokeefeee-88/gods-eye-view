@@ -36,7 +36,7 @@ Penampil Pannellum dimuat dari jsDelivr CDN. Koneksi internet diperlukan untuk m
 ## Tahap integrasi berikutnya
 
 1. Tambahkan menu Virtual Tour pada panel utama GOD EYE VIEW.
-2. Hubungkan metadata latitude/longitude dengan kamera globe Cesium.
+2. Marker gedung Virtual Tour tampil di globe Cesium dari metadata latitude/longitude pada IndexedDB browser yang sama; klik marker untuk membuka tur.
 3. Tambahkan API backend dan autentikasi untuk sinkronisasi antarperangkat.
 4. Tambahkan tautan berbagi dan QR code setelah penyimpanan server tersedia.
 5. Integrasikan AI untuk menyusun deskripsi ruangan dari informasi yang telah disetujui pengguna.
