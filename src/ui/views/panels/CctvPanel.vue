@@ -33,7 +33,7 @@ const frameData = computed(() =>
     <div class="cyber-panel-body ui-scroll" data-rail-scroller>
     <div id="cctv-frame-wrap" :class="['cctv-frame-wrap', { loading: frame?.wrapLoading, 'has-frame': frame?.hasFrame }]">
       <span class="cctv-frame-caption" aria-hidden="true">{{ t('ACQUIRING FRAME') }}</span>
-      <img id="cctv-frame" alt="CCTV feed frame" :class="{ active: frame?.hasFrame }" :src="frame?.src || undefined" :hidden="live" v-bind="frameData" />
+      <img id="cctv-frame" alt="CCTV feed frame" :class="{ active: frame?.hasFrame }" :src="frame?.src || undefined" :hidden="live || externalPageUrl" v-bind="frameData" />
       <canvas id="cctv-video" class="cctv-frame" :hidden="!live"></canvas>
       <iframe
         v-if="externalPageUrl"
