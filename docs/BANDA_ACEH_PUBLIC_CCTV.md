@@ -1,0 +1,31 @@
+# Banda Aceh Public CCTV Integration
+
+## Scope
+
+The GOD EYE VIEW Wilkum navigator includes a direct shortcut to the official public CCTV portal:
+
+- Portal: https://cctv.bandaacehkota.go.id/
+- Operator/publisher: Pemerintah Kota Banda Aceh / Diskominfotik portal
+- Access mode in this phase: user-initiated navigation to the public portal in a new tab
+- Data boundary: only publicly published camera listings and feeds; no private camera endpoints, credentials, admin access, or authentication bypass.
+
+## Public portal snapshot
+
+At the time this integration was prepared, the public portal search index displayed 60 registered cameras: 38 online and 22 offline. These are a time-specific portal snapshot, not a live count stored in GOD EYE VIEW. Always use the portal's current status for operational decisions.
+
+## Current implementation status
+
+- Added a clearly labeled "BUKA CCTV PUBLIK KOTA BANDA ACEH" link to the Wilkum Polresta navigator.
+- The link opens the official portal in a separate browser tab.
+- The app does not yet ingest the portal's camera catalog, coordinates, status, or video frames into the Cesium globe.
+- In-app camera mapping requires a documented public API or a redistribution/embedding permission and a verified schema for camera IDs, coordinates, status, feed URLs, and attribution.
+
+## Next integration gate
+
+Before building a native camera pack, verify with the portal operator:
+1. Whether a public read-only catalog/API exists.
+2. Whether camera coordinates and online/offline status may be consumed by third-party applications.
+3. Whether public feed URLs may be embedded or proxied, and the permitted refresh/rate limits.
+4. Required attribution and any restrictions on storage, recording, or redistribution.
+
+Do not scrape private endpoints, defeat access controls, or represent an offline camera placeholder as a live feed.
