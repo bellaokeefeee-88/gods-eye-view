@@ -1,6 +1,5 @@
 import { catalogControlServices } from './catalog.js';
 import { StyleManager } from '../ui/composition.js';
-import { flyToAustin } from '../camera.js';
 import { installZoomOutGuard } from './zoomOutGuard.js';
 import { initCockpitCloudEffects } from '../cockpitCloudEffects.js';
 import { t } from '../i18n/index.js';
@@ -57,10 +56,11 @@ export function createApplicationControls({
   });
   defer(() => cockpitCloudEffects?.destroy());
 
-  // If no share link state, do default fly-to Austin
+  // The scene phase installs the Wilkum Polresta Banda Aceh navigator and
+  // flies to its regional overview before controls are constructed. Do not
+  // override that configured default with the upstream Austin demo location.
   if (!styleManager.hasShareState) {
-    loaderStatus.textContent = t('Flying to Austin, TX...');
-    defer(flyToAustin(viewer));
+    loaderStatus.textContent = t('Wilkum Polresta Banda Aceh ready');
   } else {
     loaderStatus.textContent = t('Restoring shared view...');
   }
