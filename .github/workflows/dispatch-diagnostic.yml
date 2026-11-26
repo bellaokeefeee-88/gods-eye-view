@@ -1,0 +1,29 @@
+name: GOD EYE Dispatch Diagnostic
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/dispatch-diagnostic.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  diagnostic:
+    name: Confirm GitHub Actions runner
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Confirm workflow started
+        run: |
+          echo "GOD EYE VIEW Actions runner started."
+          echo "Repository: ${GITHUB_REPOSITORY}"
+          echo "Branch/ref: ${GITHUB_REF}"
+          echo "Commit: ${GITHUB_SHA}"
+          echo "Event: ${GITHUB_EVENT_NAME}"
+      - name: Confirm repository checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - name: Confirm diagnostic completion
+        run: echo "GOD EYE VIEW diagnostic completed successfully."
