@@ -4,6 +4,7 @@ const $ = (selector) => document.querySelector(selector);
 let leftViewer = null;
 let rightViewer = null;
 let urls = [];
+let syncing = false;
 
 function openDb() {
   return new Promise((resolve, reject) => {
@@ -45,10 +46,12 @@ function buildViewer(element, scene) {
   });
 }
 function syncCamera(source, target) {
-  if (!source || !target) return;
+  if (!source || !target || syncing) return;
+  syncing = true;
   target.setPitch(source.getPitch(), 0);
   target.setYaw(source.getYaw(), 0);
   target.setHfov(source.getHfov(), 0);
+  window.setTimeout(() => { syncing = false; }, 0);
 }
 function bindSync(source, target) {
   ["mouseup", "touchend", "zoomchange"].forEach((eventName) => {
@@ -73,7 +76,10 @@ async function renderComparison() {
     disposeViewers();
     return;
   }
-  if (!rightSelect.value || rightSelect.value === leftSelect.value) rightSelect.selectedIndex = 1;
+  if (!rightSelect.value || rightSelect.value === leftSelect.value) {
+    const alternative = scenes.find((scene) => scene.id !== leftSelect.value);
+    if (alternative) rightSelect.value = alternative.id;
+  }
   const left = scenes.find((scene) => scene.id === leftSelect.value) || scenes[0];
   const right = scenes.find((scene) => scene.id === rightSelect.value) || scenes[1];
   disposeViewers();
