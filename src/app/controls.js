@@ -46,9 +46,13 @@ export function createApplicationControls({
   // Austin). Let normal share restoration finish, then enforce the requested
   // Polresta Banda Aceh regional opening view without discarding shared layers
   // or visual settings.
-  void styleManager.initialRestorePromise.finally(() => {
+  const focusWilkumAfterRestore = () => {
     if (!viewer.isDestroyed()) wilkumNavigator?.showWilkum?.();
-  });
+  };
+  void styleManager.initialRestorePromise.then(
+    focusWilkumAfterRestore,
+    focusWilkumAfterRestore,
+  );
   defer(
     installZoomOutGuard(viewer, {
       subscribeCameraHandoff: (listener) =>
