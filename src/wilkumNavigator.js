@@ -61,7 +61,9 @@ function addStyles() {
   document.head.appendChild(style);
 }
 
-/** Set a Banda Aceh/Aceh Besar overview on every page load and add a Polsek navigator. */
+/**
+ * Set a Banda Aceh/Aceh Besar overview on every page load and add a Polsek navigator.
+ */
 export function installWilkumNavigator(viewer, operations) {
   if (!viewer || viewer.isDestroyed()) return { destroy() {} };
   addStyles();
@@ -90,7 +92,9 @@ export function installWilkumNavigator(viewer, operations) {
   function setBusy(value, message) {
     pending = value;
     all.disabled = value;
-    body.querySelectorAll('.gev-polsek').forEach((button) => { button.disabled = value; });
+    body.querySelectorAll('.gev-polsek').forEach((button) => {
+      button.disabled = value;
+    });
     status.textContent = message;
   }
 
