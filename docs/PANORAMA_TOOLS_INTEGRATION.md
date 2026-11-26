@@ -1,31 +1,68 @@
 # GOD EYE VIEW — Panorama Tools Integration
 
-## Unified launcher
+## Shortcut utama
 
-Open `/panorama-tools/` from the GOD EYE VIEW application. The Cesium globe action bar now opens this page through the single 360° shortcut.
+- Di dalam aplikasi GOD EYE VIEW: tombol **360°** pada toolbar globe membuka `/panorama-tools/`.
+- Halaman pengelola: `/panorama-tools/`.
+- Modul panorama internal: `/virtual-tour/`.
 
-## Available destinations
+## Fitur yang sudah tersedia pada modul internal
 
-| Tool | Source repository | Integration state |
-|---|---|---|
-| GOD EYE VIEW Virtual Tour | `public/virtual-tour/` | Existing internal MVP; uses browser IndexedDB and Cesium building marker |
-| In360TourBuilder | https://github.com/inqiu/in360TourBuilder | External source shortcut only; source structure, license, dependencies and security need review |
-| Panorama Site Builder | https://github.com/Berengow/panorama-site-builder | External source shortcut only; README describes Pannellum-based HTML/CSS/JS builder, hotspot editor, theme options and ZIP export |
-| PanoLoop | https://github.com/arminmstfv/PanoLoop | External source shortcut only; README describes panorama walkthroughs, floor-plan navigation, hotspots and synchronized before/after comparison |
+| Fitur | Implementasi |
+|---|---|
+| Unggah banyak foto panorama | Pannellum viewer dan penyimpanan IndexedDB |
+| Walkthrough antar-ruangan | Hotspot scene-to-scene |
+| Navigasi denah | Upload denah dan marker ruangan |
+| Geolokasi gedung | Metadata latitude/longitude dan marker Cesium |
+| Perbandingan 360° | Dua panorama dengan arah pandang dan zoom tersinkronisasi |
+| Cadangan proyek | ZIP lokal berisi foto, denah, metadata, hotspot, dan manifest JSON |
 
-## What this change does
+Cadangan ZIP dibuat pada browser pengguna. Fitur impor/pemulihan ZIP belum tersedia. Penyimpanan IndexedDB bersifat lokal per browser/perangkat dan belum tersinkron ke VPS atau antarperangkat.
 
-- Adds a single Panorama Studio launcher page at `public/panorama-tools/index.html`.
-- Changes the existing globe toolbar shortcut to open the launcher.
-- Provides direct repository and ZIP links for the three requested upstream projects.
-- Keeps the existing internal Virtual Tour module as the first destination.
+## Audit tiga repositori sumber
 
-## Important boundary
+### 1. In360TourBuilder
 
-The three upstream projects have **not** been copied into this repository or bundled as runnable applications. This is a safe first-stage integration through one access point. A true code merge requires inspection of each source tree, license, dependencies, security posture, data handling and compatibility with the GOD EYE VIEW Vite/Vue/Cesium architecture. In particular, the In360TourBuilder repository did not expose a README through the connected GitHub file reader during this pass, so its implementation and license remain unverified.
+Repositori: https://github.com/inqiu/in360TourBuilder
 
-The upstream projects' local browser storage/export behavior is independent of GOD EYE VIEW's IndexedDB. No cross-app data synchronization is implemented by this launcher.
+- Struktur yang ditemukan adalah aplikasi Java desktop, dengan kelas GUI, koleksi panorama, pembentuk XML tur, pemroses gambar, dan FTP uploader.
+- README dan berkas LICENSE tidak ditemukan pada pohon repositori yang diperiksa.
+- Tidak digabung ke aplikasi web GOD EYE VIEW karena lisensi tidak terverifikasi dan arsitektur Java desktop tidak dapat dipasang sebagai modul Vue/Vite secara langsung.
+- Integrasi lanjutan memerlukan izin/lisensi yang jelas dan spesifikasi format proyek/ekspor.
 
-## Verification
+### 2. Panorama Site Builder
 
-GitHub confirms the launcher and toolbar changes are committed on `feature/virtual-tour-360`. A production build and browser test have not been run in this environment.
+Repositori: https://github.com/Berengow/panorama-site-builder
+
+- README menyatakan MIT dan menjelaskan builder HTML/CSS/JS berbasis Pannellum, hotspot, tema, dan ekspor ZIP.
+- Berkas LICENSE terpisah tidak ditemukan pada root yang diperiksa.
+- `js/app.js` yang tersedia hanya sekitar 2,2 KB dan berisi placeholder bahwa logika aplikasi lengkap belum disertakan. Karena itu, repositori tidak dapat diperlakukan sebagai aplikasi siap pakai untuk digabung.
+- Fitur yang kompatibel (pengelolaan panorama, hotspot, dan cadangan ZIP) dibuat sebagai implementasi native GOD EYE VIEW; bukan salinan kode upstream.
+
+### 3. PanoLoop
+
+Repositori: https://github.com/arminmstfv/PanoLoop
+
+- Lisensi MIT tersedia dan telah diperiksa.
+- README menjelaskan panorama walkthrough, hotspot, navigasi denah, dan mode perbandingan dua panorama.
+- File aplikasi tunggal upstream berukuran besar; kode upstream tidak disalin langsung ke modul GEV.
+- Fitur perbandingan dua panorama dengan sinkronisasi arah pandang/zoom diimplementasikan secara native pada GEV.
+
+## Batasan dan status
+
+- Ini adalah integrasi fitur yang kompatibel ke satu modul GOD EYE VIEW, bukan penggabungan mentah seluruh source code dari tiga repositori.
+- In360TourBuilder tetap menjadi referensi eksternal sampai lisensi dan jalur integrasinya jelas.
+- Tema builder lanjutan, ekspor situs statis siap-hosting, impor/pemulihan ZIP, stitching panorama, akun, backend, dan sinkronisasi multi-perangkat belum tersedia.
+- Foto dan metadata tetap berada di IndexedDB browser; jangan menyimpan materi sensitif pada perangkat atau server yang tidak disetujui.
+- Perubahan berada di branch `feature/virtual-tour-360` dan PR #1. Belum digabung ke `main` dan belum dipublikasikan ke hosting produksi.
+
+## Verifikasi
+
+File baru/diubah pada tahap ini:
+- `public/virtual-tour/compare.js`
+- `public/virtual-tour/backup.js`
+- `public/virtual-tour/index.html`
+- `public/virtual-tour/style.css`
+- `public/panorama-tools/index.html`
+
+Build produksi dan pengujian browser end-to-end belum dijalankan pada tahap ini.
