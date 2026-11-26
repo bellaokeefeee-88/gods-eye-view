@@ -94,16 +94,6 @@ export function installVirtualTourGlobe(viewer, { onOpen = null } = {}) {
         outlineWidth: 2,
         disableDepthTestDistance: Number.POSITIVE_INFINITY,
       },
-      label: {
-        text: name + '\nVIRTUAL TOUR 360°',
-        font: '12px sans-serif',
-        fillColor: Cesium.Color.fromCssColorString('#f2d98c'),
-        outlineColor: Cesium.Color.BLACK,
-        outlineWidth: 3,
-        style: Cesium.LabelStyle.FILL_AND_OUTLINE,
-        pixelOffset: new Cesium.Cartesian2(0, -22),
-        disableDepthTestDistance: Number.POSITIVE_INFINITY,
-      },
       properties: {
         gevVirtualTour: true,
         virtualTourUrl: TOUR_URL,
