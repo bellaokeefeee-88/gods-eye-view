@@ -53,6 +53,8 @@ function addStyles() {
     #gev-wilkum-nav summary::-webkit-details-marker{display:none}
     #gev-wilkum-nav .gev-wilkum-body{max-height:min(62vh,560px);overflow:auto;padding:0 10px 12px}
     #gev-wilkum-nav .gev-wilkum-all{width:100%;margin:0 0 10px;padding:10px;border:1px solid #5bddea;border-radius:8px;background:#103747;color:#e8fdff;font-weight:800}
+    #gev-wilkum-nav .gev-cctv-public{display:block;width:100%;box-sizing:border-box;margin:0 0 10px;padding:10px;border:1px solid #e4bd69;border-radius:8px;background:rgba(105,75,22,.32);color:#ffe9b1;text-align:center;text-decoration:none;font-weight:800;letter-spacing:.04em}
+    #gev-wilkum-nav .gev-cctv-public:focus-visible{outline:2px solid #f2ce75;outline-offset:2px}
     #gev-wilkum-nav h3{margin:10px 4px 6px;color:#e4bd69;font-size:10px;letter-spacing:.13em}
     #gev-wilkum-nav .gev-polsek{display:block;width:100%;text-align:left;margin:4px 0;padding:8px 10px;border:1px solid #ffffff20;border-radius:7px;background:#ffffff0d;color:#eaf8fb}
     #gev-wilkum-nav button:focus-visible,#gev-wilkum-nav summary:focus-visible{outline:2px solid #f2ce75;outline-offset:2px}
@@ -89,6 +91,14 @@ export function installWilkumNavigator(viewer, operations) {
   status.setAttribute('role', 'status');
   status.textContent = 'Titik awal: Masjid Raya Baiturrahman, Banda Aceh';
   body.appendChild(status);
+  const publicCctv = document.createElement('a');
+  publicCctv.className = 'gev-cctv-public';
+  publicCctv.href = 'https://cctv.bandaacehkota.go.id/';
+  publicCctv.target = '_blank';
+  publicCctv.rel = 'noopener noreferrer';
+  publicCctv.textContent = 'BUKA CCTV PUBLIK KOTA BANDA ACEH ↗';
+  publicCctv.setAttribute('aria-label', 'Buka portal resmi CCTV publik Kota Banda Aceh di tab baru');
+  body.appendChild(publicCctv);
   let active = true;
   let pending = false;
 
