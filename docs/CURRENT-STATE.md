@@ -6835,3 +6835,14 @@ the container healthy. Checks time out after 10 seconds, with a 30-second
 startup grace period and three consecutive failures before reporting unhealthy.
 This reports app HTTP availability, not individual provider health, and does not
 configure automatic restarts.
+
+## Banda Aceh public CCTV shortcut
+
+The Wilkum Polresta Banda Aceh navigator provides a user-initiated link to the
+official public CCTV portal at https://cctv.bandaacehkota.go.id/. The link opens
+the portal in a separate tab. The current integration does not ingest the
+portal's camera catalog, coordinates, live status, or frames into the globe.
+A native camera source pack remains gated on a verified public API/feed schema,
+permission to consume/embed the feeds, and provider attribution/rate-limit terms.
+Only publicly published cameras are in scope until the operator grants further
+written access.
