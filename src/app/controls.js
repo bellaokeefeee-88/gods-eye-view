@@ -11,7 +11,7 @@ import { t } from '../i18n/index.js';
  * picker, for a host that does not initialize Core's locale.
  */
 export function createApplicationControls({
-  scene: { viewer, mapStackController, operations },
+  scene: { viewer, mapStackController, operations, wilkumNavigator },
   loaderStatus,
   Controls = StyleManager,
   services,
@@ -41,6 +41,14 @@ export function createApplicationControls({
   defer(() => styleManager.orbitController.stop());
   defer(() => styleManager.hud.destroy());
   defer(() => styleManager.dispose());
+
+  // A URL can carry an older shared camera (the current shortcut points to
+  // Austin). Let normal share restoration finish, then enforce the requested
+  // Polresta Banda Aceh regional opening view without discarding shared layers
+  // or visual settings.
+  void styleManager.initialRestorePromise.finally(() => {
+    if (!viewer.isDestroyed()) wilkumNavigator?.showWilkum?.();
+  });
   defer(
     installZoomOutGuard(viewer, {
       subscribeCameraHandoff: (listener) =>
