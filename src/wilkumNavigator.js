@@ -71,6 +71,7 @@ export function installWilkumNavigator(viewer, operations) {
   nav.id = 'gev-wilkum-nav';
   nav.setAttribute('aria-label', 'Navigasi Wilkum Polresta Banda Aceh');
   const details = document.createElement('details');
+  details.open = true;
   const summary = document.createElement('summary');
   summary.textContent = 'WILKUM POLRESTA • 19 POLSEK';
   details.appendChild(summary);
@@ -158,6 +159,7 @@ export function installWilkumNavigator(viewer, operations) {
   showWilkum();
 
   return {
+    showWilkum,
     destroy() {
       active = false;
       nav.remove();
