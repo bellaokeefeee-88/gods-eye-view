@@ -33,9 +33,11 @@ async function exportBackup() {
   if (!window.JSZip) { notify("Library ZIP belum tersedia. Periksa koneksi internet."); return; }
   const db = await openDb();
   const tx = db.transaction(["scenes", "settings"], "readonly");
-  const scenes = await requestValue(tx.objectStore("scenes").getAll());
-  const floorSetting = await requestValue(tx.objectStore("settings").get("floor-plan"));
-  const metadataSetting = await requestValue(tx.objectStore("settings").get("building-metadata"));
+  const [scenes, floorSetting, metadataSetting] = await Promise.all([
+    requestValue(tx.objectStore("scenes").getAll()),
+    requestValue(tx.objectStore("settings").get("floor-plan")),
+    requestValue(tx.objectStore("settings").get("building-metadata"))
+  ]);
   db.close();
   if (!scenes.length) { notify("Belum ada panorama untuk dicadangkan."); return; }
   const zip = new window.JSZip();
