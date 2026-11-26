@@ -11,8 +11,12 @@ function readBuildingMetadata() {
     const request = indexedDB.open(DATABASE_NAME, DATABASE_VERSION);
     request.onupgradeneeded = () => {
       const db = request.result;
-      if (!db.objectStoreNames.contains('scenes')) db.createObjectStore('scenes', { keyPath: 'id' });
-      if (!db.objectStoreNames.contains(SETTINGS_STORE)) db.createObjectStore(SETTINGS_STORE, { keyPath: 'key' });
+      if (!db.objectStoreNames.contains('scenes')) {
+        db.createObjectStore('scenes', { keyPath: 'id' });
+      }
+      if (!db.objectStoreNames.contains(SETTINGS_STORE)) {
+        db.createObjectStore(SETTINGS_STORE, { keyPath: 'key' });
+      }
     };
     request.onerror = () => reject(request.error);
     request.onsuccess = () => {
@@ -42,9 +46,16 @@ function validCoordinates(metadata) {
   if (!metadata) return false;
   const latitude = Number(metadata.latitude);
   const longitude = Number(metadata.longitude);
-  return Number.isFinite(latitude) && latitude >= -90 && latitude <= 90 &&
-    Number.isFinite(longitude) && longitude >= -180 && longitude <= 180 &&
-    metadata.latitude !== '' && metadata.longitude !== '';
+  return (
+    Number.isFinite(latitude) &&
+    latitude >= -90 &&
+    latitude <= 90 &&
+    Number.isFinite(longitude) &&
+    longitude >= -180 &&
+    longitude <= 180 &&
+    metadata.latitude !== '' &&
+    metadata.longitude !== ''
+  );
 }
 
 /**
@@ -56,7 +67,6 @@ export function installVirtualTourGlobe(viewer, { onOpen = null } = {}) {
   let disposed = false;
   let dataSource = null;
   let selectedListener = null;
-  let entity = null;
 
   const ready = (async () => {
     if (!globalThis.indexedDB || !viewer || viewer.isDestroyed()) return false;
@@ -73,7 +83,7 @@ export function installVirtualTourGlobe(viewer, { onOpen = null } = {}) {
     const longitude = Number(metadata.longitude);
     const name = String(metadata.buildingName || 'Virtual Tour 360').slice(0, 100);
     dataSource = new Cesium.CustomDataSource('virtual-tour-locations');
-    entity = dataSource.entities.add({
+    dataSource.entities.add({
       id: ENTITY_ID,
       name,
       position: Cesium.Cartesian3.fromDegrees(longitude, latitude, 0),
@@ -128,7 +138,6 @@ export function installVirtualTourGlobe(viewer, { onOpen = null } = {}) {
       if (dataSource && !viewer.isDestroyed())
         viewer.dataSources.remove(dataSource, true);
       dataSource = null;
-      entity = null;
     },
   };
 }

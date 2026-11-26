@@ -29,7 +29,7 @@ const tilted = computed(() => Boolean(camera.value?.tilted));
   </button>
   <GlobeCompass @click="act('northUp')" />
   <a id="virtual-tour-open" href="/virtual-tour/" target="_blank" rel="noopener noreferrer" :aria-label="t('Open Virtual Tour 360')" :title="t('Open Virtual Tour 360')">
-    <span class="material-symbols-outlined" aria-hidden="true">view_in_ar</span>
+    <span class="material-symbols-outlined" aria-hidden="true">streetview</span>
   </a>
   <button id="reset-globe-view" type="button" :aria-label="resetBusy ? t('Resetting to full globe view') : t('Reset to full globe view')" :title="t('Reset camera and return to full globe view')" @click="act('reset')">
     <span class="material-symbols-outlined" aria-hidden="true">public</span>

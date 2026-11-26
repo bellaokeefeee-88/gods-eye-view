@@ -2,7 +2,7 @@
 
 ## Tujuan
 
-Modul Virtual Tour 360° merupakan modul terpisah di dalam GOD EYE VIEW. Modul ini menambahkan visualisasi panorama interior gedung tanpa mengubah globe Cesium, layer pemantauan, atau antarmuka utama.
+Modul Virtual Tour 360° merupakan modul terpisah di dalam GOD EYE VIEW. Modul ini menambahkan visualisasi panorama interior gedung yang terhubung ke globe Cesium melalui marker lokasi, tanpa mengganti sistem layer pemantauan yang sudah ada.
 
 ## Membuka modul
 
@@ -19,7 +19,10 @@ Contoh lokal: `http://localhost:4173/virtual-tour/`
 - Membuat hotspot perpindahan antar-ruangan.
 - Mengunggah gambar denah dan menempatkan penanda ruangan.
 - Menyimpan panorama, denah, hotspot, dan metadata gedung di IndexedDB browser.
-- Menyimpan latitude/longitude gedung sebagai metadata untuk integrasi globe berikutnya.
+- Menyimpan latitude/longitude gedung sebagai metadata bersama pada IndexedDB browser.
+- Menampilkan marker gedung pada globe Cesium utama jika koordinat valid telah disimpan.
+- Klik marker gedung pada globe untuk membuka Virtual Tour pada tab baru.
+- Tombol Street View pada action bar globe membuka halaman pengelolaan Virtual Tour.
 
 ## Format foto
 
@@ -35,9 +38,7 @@ Penampil Pannellum dimuat dari jsDelivr CDN. Koneksi internet diperlukan untuk m
 
 ## Tahap integrasi berikutnya
 
-1. Tambahkan menu Virtual Tour pada panel utama GOD EYE VIEW.
-2. Marker gedung Virtual Tour tampil di globe Cesium dari metadata latitude/longitude pada IndexedDB browser yang sama; klik marker untuk membuka tur.
-3. Tambahkan API backend dan autentikasi untuk sinkronisasi antarperangkat.
+1. Tambahkan API backend dan autentikasi untuk sinkronisasi antarperangkat.
 4. Tambahkan tautan berbagi dan QR code setelah penyimpanan server tersedia.
 5. Integrasikan AI untuk menyusun deskripsi ruangan dari informasi yang telah disetujui pengguna.
 6. Tambahkan proses stitching panorama dan pemeriksaan kualitas gambar bila diperlukan.
