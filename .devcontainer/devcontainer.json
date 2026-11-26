@@ -1,13 +1,13 @@
 {
   "name": "GOD EYE VIEW",
   "image": "mcr.microsoft.com/devcontainers/javascript-node:1-24-bookworm",
-  "postCreateCommand": "npm ci",
-  "postStartCommand": "bash .devcontainer/start-codespaces.sh",
+  "postCreateCommand": "bash .devcontainer/start-codespaces.sh || echo 'GOD EYE VIEW setup needs attention; Codespace remains available.'",
+  "postStartCommand": "bash .devcontainer/start-codespaces.sh || echo 'GOD EYE VIEW did not auto-start; run the launcher from the terminal.'",
   "forwardPorts": [4173],
   "portsAttributes": {
     "4173": {
       "label": "GOD EYE VIEW",
-      "onAutoForward": "notify",
+      "onAutoForward": "openBrowser",
       "visibility": "private"
     }
   },
