@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#09111d">
+  <title>GOD EYE VIEW — Panorama Studio</title>
+  <style>
+    :root{color-scheme:dark;--bg:#09111d;--panel:#111e2e;--line:#26394e;--gold:#d9b65d;--muted:#9fb0c2;--white:#edf3f8}
+    *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 70% 0%,#19314b 0,transparent 42%),var(--bg);color:var(--white);font:15px/1.55 Inter,system-ui,sans-serif}
+    a{color:inherit}.shell{max-width:1120px;margin:auto;padding:28px 20px 60px}.top{display:flex;justify-content:space-between;align-items:center;gap:16px;border-bottom:1px solid var(--line);padding-bottom:18px}.brand{font-weight:800;letter-spacing:.12em}.brand small{display:block;color:var(--gold);font-size:10px;letter-spacing:.2em}.back{color:var(--muted);text-decoration:none;border:1px solid var(--line);padding:9px 13px;border-radius:8px}
+    .hero{padding:42px 0 24px}.eyebrow{color:var(--gold);letter-spacing:.2em;font-size:11px;font-weight:700}.hero h1{font-size:clamp(30px,5vw,48px);line-height:1.05;margin:8px 0 12px}.hero p{max-width:720px;color:var(--muted);margin:0}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:24px}.card{background:linear-gradient(160deg,#15263a,var(--panel));border:1px solid var(--line);border-radius:13px;padding:20px;display:flex;flex-direction:column;min-height:235px}.number{font-size:11px;color:var(--gold);letter-spacing:.18em}.card h2{font-size:19px;margin:8px 0}.card p{color:var(--muted);font-size:13px;margin:0 0 18px}.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:auto}.btn{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;border:1px solid var(--gold);color:#111827;background:var(--gold);font-weight:750;padding:9px 12px;border-radius:7px;font-size:12px}.btn.secondary{background:transparent;color:var(--white);border-color:var(--line)}.notice{margin-top:22px;padding:15px;border-left:3px solid var(--gold);background:#101c2a;color:var(--muted);font-size:12px}.foot{margin-top:28px;color:#7f93a8;font-size:11px}
+    @media(max-width:560px){.shell{padding:18px 14px 40px}.top{align-items:flex-start}.back{font-size:12px}.card{min-height:210px}}
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="top">
+      <div class="brand">GOD EYE VIEW<small>PANORAMA STUDIO · 360°</small></div>
+      <a class="back" href="/">Kembali ke Globe Cesium</a>
+    </header>
+    <section class="hero">
+      <div class="eyebrow">PUSAT AKSES TERPADU</div>
+      <h1>360° Panorama Tools</h1>
+      <p>Satu pintu untuk mengelola panorama 360° di GOD EYE VIEW. Fitur panorama, hotspot, denah, lokasi globe, perbandingan dua panorama, dan cadangan ZIP tersedia melalui modul internal. Repositori eksternal dicantumkan sebagai sumber referensi dengan status kompatibilitas yang dijelaskan secara terbuka.</p>
+    </section>
+    <section class="grid" aria-label="Daftar aplikasi panorama">
+      <article class="card">
+        <div class="number">GEV · MODUL INTERNAL</div>
+        <h2>Virtual Tour 360°</h2>
+        <p>Modul terpadu: unggah banyak panorama, hotspot antar-ruangan, denah dengan penanda, metadata koordinat untuk globe Cesium, perbandingan dua panorama dengan kamera tersinkronisasi, dan cadangan ZIP lokal.</p>
+        <div class="actions"><a class="btn" href="/virtual-tour/">Buka aplikasi</a></div>
+      </article>
+      <article class="card">
+        <div class="number">SOURCE 01</div>
+        <h2>In360TourBuilder</h2>
+        <p>Proyek Java desktop dengan modul pengelola tur, pemrosesan gambar panorama, pembentuk XML, dan FTP uploader. Belum digabung: lisensi tidak ditemukan dan arsitekturnya bukan modul web Vue/Vite.</p>
+        <div class="actions"><a class="btn" href="https://github.com/inqiu/in360TourBuilder" target="_blank" rel="noopener noreferrer">Buka repositori</a><a class="btn secondary" href="https://github.com/inqiu/in360TourBuilder/archive/refs/heads/master.zip" target="_blank" rel="noopener noreferrer">Unduh ZIP</a></div>
+      </article>
+      <article class="card">
+        <div class="number">SOURCE 02</div>
+        <h2>Panorama Site Builder</h2>
+        <p>Referensi fitur editor hotspot, tema, preview Pannellum, dan ekspor. Kode sumber yang tersedia belum lengkap dan berkas LICENSE terpisah tidak ditemukan; fitur inti yang kompatibel diadaptasi secara native di GEV.</p>
+        <div class="actions"><a class="btn" href="https://github.com/Berengow/panorama-site-builder" target="_blank" rel="noopener noreferrer">Buka repositori</a><a class="btn secondary" href="https://github.com/Berengow/panorama-site-builder/archive/refs/heads/main.zip" target="_blank" rel="noopener noreferrer">Unduh ZIP</a></div>
+      </article>
+      <article class="card">
+        <div class="number">SOURCE 03</div>
+        <h2>PanoLoop</h2>
+        <p>Referensi MIT untuk walkthrough 360°, hotspot, denah, dan perbandingan panorama. Mode perbandingan kamera tersinkronisasi kini diimplementasikan native pada modul Virtual Tour GEV.</p>
+        <div class="actions"><a class="btn" href="https://github.com/arminmstfv/PanoLoop" target="_blank" rel="noopener noreferrer">Buka repositori</a><a class="btn secondary" href="https://github.com/arminmstfv/PanoLoop/archive/refs/heads/main.zip" target="_blank" rel="noopener noreferrer">Unduh ZIP</a></div>
+      </article>
+    </section>
+    <aside class="notice"><strong>Status integrasi:</strong> fitur yang kompatibel telah diadaptasi ke modul internal GOD EYE VIEW. In360TourBuilder belum digabung karena lisensi tidak ditemukan dan aplikasinya berbasis Java desktop. Panorama Site Builder belum dapat diimpor utuh karena source aplikasi yang tersedia tidak lengkap dan berkas LICENSE terpisah tidak ditemukan. PanoLoop memiliki lisensi MIT; fitur perbandingan panorama telah dibuat native di GEV. Tautan eksternal tetap membuka repositori/ZIP sumber, bukan aplikasi yang di-host. Penyimpanan panorama masih lokal pada browser dan belum tersinkron ke VPS atau perangkat lain.</aside>
+    <footer class="foot">GOD EYE VIEW · Panorama Studio · Shortcut terpadu untuk pengembangan Virtual Tour 360°</footer>
+  </main>
+</body>
+</html>

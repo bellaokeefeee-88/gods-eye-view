@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0a0f18">
+  <title>GOD EYE VIEW — Virtual Tour 360°</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css">
+  <link rel="stylesheet" href="./style.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+  <script type="module" src="./app.js"></script>
+  <script type="module" src="./compare.js"></script>
+  <script type="module" src="./backup.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="Kembali ke GOD EYE VIEW"><span class="brand-mark">GEV</span><span>GOD EYE VIEW <small>VIRTUAL TOUR 360°</small></span></a>
+    <div class="top-actions">
+      <span id="storage-status" class="status">Penyimpanan lokal</span>
+      <button id="compare-toggle" class="top-tool" type="button">Bandingkan 360°</button>
+      <button id="backup-export" class="top-tool" type="button">Cadangkan ZIP</button>
+      <a class="back-link" href="/panorama-tools/">Panorama Studio</a>
+      <a class="back-link" href="/">Kembali ke Globe</a>
+    </div>
+  </header>
+  <main class="layout">
+    <aside class="sidebar">
+      <section class="section-head"><div><p class="eyebrow">PENGELOLA TUR</p><h1>Virtual Tour</h1></div><span class="version">MVP 0.1</span></section>
+      <label class="upload-button" for="panorama-files">＋ Tambah foto panorama</label>
+      <input id="panorama-files" type="file" accept="image/*" multiple hidden>
+      <p class="hint">Gunakan foto panorama equirectangular 360° (idealnya rasio 2:1).</p>
+      <div class="section-title"><span>DAFTAR RUANGAN</span><span id="scene-count">0</span></div>
+      <div id="scene-list" class="scene-list"><div class="empty">Belum ada panorama. Tambahkan foto 360° untuk memulai.</div></div>
+      <div class="divider"></div>
+      <section class="tools">
+        <h2>Alat tur</h2>
+        <label for="destination-select">Tujuan hotspot</label>
+        <select id="destination-select"><option value="">Pilih ruangan tujuan</option></select>
+        <button id="hotspot-mode" class="secondary" disabled>＋ Tambah hotspot penghubung</button>
+        <p class="hint">Aktifkan mode, lalu klik posisi di panorama untuk membuat titik perpindahan.</p>
+        <label class="upload-button secondary-upload" for="floorplan-file">Unggah denah gedung</label>
+        <input id="floorplan-file" type="file" accept="image/*" hidden>
+        <p class="hint">Setelah denah tampil, klik denah untuk menempatkan penanda ruangan aktif.</p>
+      </section>
+      <div class="divider"></div>
+      <section class="location-fields">
+        <h2>Lokasi gedung</h2>
+        <label for="building-name">Nama gedung / lokasi</label>
+        <input id="building-name" type="text" placeholder="Contoh: Gedung Pelayanan">
+        <div class="coordinate-row">
+          <div><label for="latitude">Latitude</label><input id="latitude" inputmode="decimal" placeholder="5.55"></div>
+          <div><label for="longitude">Longitude</label><input id="longitude" inputmode="decimal" placeholder="95.32"></div>
+        </div>
+        <button id="save-location" class="secondary">Simpan metadata lokasi</button>
+        <p class="hint">Koordinat disimpan di IndexedDB browser yang sama. Muat ulang halaman globe GOD EYE VIEW setelah menyimpan agar marker gedung tampil.</p>
+      </section>
+    </aside>
+    <section class="workspace">
+      <div class="viewer-heading"><div><p class="eyebrow">PANORAMA INTERAKTIF</p><h2 id="active-title">Pilih panorama</h2></div><span id="viewer-message" class="viewer-message">Menunggu foto 360°</span></div>
+      <div id="panorama" class="panorama"><div class="viewer-placeholder"><span>360°</span><p>Tambahkan foto panorama untuk membuka penampil interaktif.</p></div></div>
+      <div class="floorplan-panel">
+        <div class="floorplan-heading"><div><p class="eyebrow">PANDUAN LOKASI</p><h2>Denah gedung</h2></div><span id="floorplan-help">Belum ada denah</span></div>
+        <div id="floorplan" class="floorplan"><div class="empty">Unggah gambar denah untuk menempatkan penanda ruangan.</div></div>
+      </div>
+    </section>
+    <section id="compare-panel" class="compare-panel" hidden>
+      <div class="compare-heading">
+        <div><p class="eyebrow">PANOLOOP-INSPIRED WORKSPACE</p><h2>Perbandingan Panorama 360°</h2></div>
+        <span id="compare-status" class="viewer-message">Pilih dua panorama</span>
+      </div>
+      <div class="compare-selectors">
+        <label>Panorama kiri<select id="compare-left"></select></label>
+        <label>Panorama kanan<select id="compare-right"></select></label>
+      </div>
+      <div class="compare-grid">
+        <div id="compare-left-view" class="compare-view"></div>
+        <div id="compare-right-view" class="compare-view"></div>
+      </div>
+      <p class="hint">Arah pandang dan tingkat zoom disinkronkan untuk membantu membandingkan dua lokasi atau kondisi. Perbandingan ini tidak melakukan penyelarasan otomatis atas foto dari posisi kamera yang berbeda.</p>
+    </section>
+  </main>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
